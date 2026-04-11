@@ -1,0 +1,13 @@
+.footer {
+    position: relative;
+    width: 100%;
+    padding: 15px 0;
+    text-align: center;
+    z-index: 1000;
+}
+
+.names {
+    color: var(--footer-names-text);
+    justify-content: center;
+    transform: translateY(-50%);
+}
