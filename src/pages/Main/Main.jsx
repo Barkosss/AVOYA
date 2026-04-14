@@ -18,44 +18,44 @@ export const teamMembers = [
     {
         id: 2,
         name: "Владимир",
-        role: "UI/UX Designer",
+        role: "Lorem ipsum",
         emoji: "🎨",
-        shortBio: "Создаёт красивые интерфейсы",
-        fullBio: "Елена отвечает за визуальную часть. Имеет 5 лет опыта в разработке интерфейсов и 3 года в дизайне.",
-        funFact: "Может отличить 50 оттенков синего",
+        shortBio: "Lorem ipsum dolor sit amet",
+        fullBio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in condimentum nisi. Fusce fringilla orci sit amet quam blandit, at.",
+        funFact: "Lorem ipsum",
         color: "#ff9500",
         achievements: ["20+ дизайн-проектов", "2 премии", "7 лет творчества"]
     },
     {
         id: 3,
         name: "Олег",
-        role: "Backend Dev",
+        role: "Lorem ipsum",
         emoji: "⚙️",
-        shortBio: "Строит надёжные сервера",
-        fullBio: "Михаил занимается бэкендом и DevOps. Специалист по Python, Django и Docker.",
-        funFact: "Пьёт только чёрный кофе без сахара",
+        shortBio: "Lorem ipsum dolor sit amet",
+        fullBio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in condimentum nisi. Fusce fringilla orci sit amet quam blandit, at.",
+        funFact: "Lorem ipsum",
         color: "#34c759",
         achievements: ["50+ API", "99.9% аптайм", "8 лет опыта"]
     },
     {
         id: 4,
         name: "Ярик",
-        role: "QA Engineer",
+        role: "Lorem ipsum",
         emoji: "🔍",
-        shortBio: "Находит баги везде",
-        fullBio: "Анна отвечает за качество продукта. Автоматизирует тесты и ведёт документацию.",
-        funFact: "Нашла баг в приложении банка и получила бонус",
+        shortBio: "Lorem ipsum dolor sit amet",
+        fullBio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in condimentum nisi. Fusce fringilla orci sit amet quam blandit, at.",
+        funFact: "Lorem ipsum",
         color: "#af52de",
         achievements: ["1000+ багов найдено", "5 лет тестирования", "Автоматизация 80%"]
     },
     {
         id: 5,
         name: "Андрей",
-        role: "Mobile Dev",
+        role: "Lorem ipsum",
         emoji: "📱",
-        shortBio: "Делает мобильные приложения",
-        fullBio: "Дмитрий разрабатывает мобильные приложения под iOS и Android. Эксперт в React Native и Flutter.",
-        funFact: "Имеет 5 смартфонов для тестирования",
+        shortBio: "Lorem ipsum dolor sit amet",
+        fullBio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in condimentum nisi. Fusce fringilla orci sit amet quam blandit, at.",
+        funFact: "Lorem ipsum",
         color: "#ff3b30",
         achievements: ["15+ приложений", "1 млн скачиваний", "6 лет опыта"]
     }
@@ -74,12 +74,8 @@ export default function Main() {
             <div className="team-page">
                 <div className="team-header">
                     <h1 className="team-title">
-                        <span className="title-icon">👥</span>
                         Наша команда
                     </h1>
-                    <p className="team-description">
-                        Познакомьтесь с нашей дружной командой 👇
-                    </p>
 
                     {/* Переключатель вида */}
                     <div className="view-toggle">
