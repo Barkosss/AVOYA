@@ -7,7 +7,7 @@
 }
 
 .names {
-    color: var(--footer-names-text);
+    color: var(--footer-text);
     justify-content: center;
     transform: translateY(-50%);
 }

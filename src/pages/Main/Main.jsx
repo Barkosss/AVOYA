@@ -63,10 +63,10 @@ export const teamMembers = [
 
 export default function Main() {
     const [selectedMember, setSelectedMember] = useState(null);
-    const [viewMode, setViewMode] = useState('grid'); // 'grid' или 'list'
+    const [viewMode, setViewMode] = useState('grid'); // grid / list
 
     const getRandomRotation = () => {
-        return Math.random() * 4 - 2; // от -2 до 2 градусов
+        return Math.random() * 4 - 2;
     };
 
     return (
