@@ -7,6 +7,7 @@ export default function ThemeToggle({ theme, setTheme }) {
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
     const longPressTimerRef = useRef(null);
     const toggleRef = useRef(null);
+    const hideTimeoutRef = useRef(null); // таймер для отложенного закрытия
 
     // Отслеживаем ширину экрана для мобильной версии
     useEffect(() => {
@@ -23,31 +24,39 @@ export default function ThemeToggle({ theme, setTheme }) {
         localStorage.setItem("colorTheme", colorTheme);
     }, [colorTheme]);
 
-    // Закрываем меню ТОЛЬКО при клике вне его
+    // Очистка таймера при размонтировании
     useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (toggleRef.current && !toggleRef.current.contains(event.target)) {
-                setIsOpen(false);
+        return () => {
+            if (hideTimeoutRef.current) {
+                clearTimeout(hideTimeoutRef.current);
             }
         };
-
-        if (isOpen) {
-            document.addEventListener('mousedown', handleClickOutside);
-        }
-
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, [isOpen]); // Добавляем isOpen в зависимости
+    }, []);
 
     const toggleTheme = () => {
         setTheme(theme === "light" ? "dark" : "light");
-        // Убираем setIsOpen(false) - меню НЕ закрывается
     };
 
     const changeColorTheme = (color) => {
         setColorTheme(color);
-        // Убираем setIsOpen(false) - меню НЕ закрывается
+    };
+
+    // Открыть меню с отменой закрытия
+    const handleMouseEnter = () => {
+        if (isMobile) return;
+        if (hideTimeoutRef.current) {
+            clearTimeout(hideTimeoutRef.current);
+            hideTimeoutRef.current = null;
+        }
+        setIsOpen(true);
+    };
+
+    // Закрыть меню с задержкой (даёт время перейти на меню)
+    const handleMouseLeave = () => {
+        if (isMobile) return;
+        hideTimeoutRef.current = setTimeout(() => {
+            setIsOpen(false);
+        }, 200); // 200ms задержка
     };
 
     // Обработчики для мобильного long press
@@ -72,6 +81,23 @@ export default function ThemeToggle({ theme, setTheme }) {
         }
     };
 
+    // Закрыть меню при клике вне (с задержкой для мобильных)
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (toggleRef.current && !toggleRef.current.contains(event.target)) {
+                setIsOpen(false);
+            }
+        };
+
+        if (isOpen) {
+            document.addEventListener('mousedown', handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [isOpen]);
+
     // Цветовые схемы
     const colorSchemes = [
         { name: "Синий", value: "blue", color: "#007aff", icon: "🎨" },
@@ -86,8 +112,8 @@ export default function ThemeToggle({ theme, setTheme }) {
         <div
             className="theme-toggle-container"
             ref={toggleRef}
-            onMouseEnter={() => !isMobile && setIsOpen(true)}
-            onMouseLeave={() => !isMobile && setIsOpen(false)}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
         >
             {/* Основная кнопка */}
             <button
@@ -102,57 +128,66 @@ export default function ThemeToggle({ theme, setTheme }) {
                 </span>
             </button>
 
-            {/* Дополнительные настройки */}
+            {/* Выпадающее меню с мостиком */}
             {isOpen && (
-                <div className="theme-dropdown">
-                    <div className="dropdown-header">
-                        <span>Настройки темы</span>
-                    </div>
+                <>
+                    {/* Невидимый мостик-буфер */}
+                    <div className="dropdown-bridge" />
 
-                    {/* Переключение светлой/тёмной темы */}
-                    <div className="dropdown-section">
-                        <div className="section-title">Режим</div>
-                        <div className="mode-switch">
-                            <button
-                                className={`mode-btn ${theme === "light" ? "active" : ""}`}
-                                onClick={() => setTheme("light")}
-                            >
-                                ☀️ Светлая
-                            </button>
-                            <button
-                                className={`mode-btn ${theme === "dark" ? "active" : ""}`}
-                                onClick={() => setTheme("dark")}
-                            >
-                                🌙 Тёмная
-                            </button>
+                    <div
+                        className="theme-dropdown"
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                    >
+                        <div className="dropdown-header">
+                            <span>Настройки темы</span>
                         </div>
-                    </div>
 
-                    {/* Выбор цветовой схемы */}
-                    <div className="dropdown-section">
-                        <div className="section-title">Акцентный цвет</div>
-                        <div className="color-grid">
-                            {colorSchemes.map(scheme => (
+                        {/* Переключение светлой/тёмной темы */}
+                        <div className="dropdown-section">
+                            <div className="section-title">Режим</div>
+                            <div className="mode-switch">
                                 <button
-                                    key={scheme.value}
-                                    className={`color-option ${colorTheme === scheme.value ? 'active' : ''}`}
-                                    style={{ backgroundColor: scheme.color }}
-                                    onClick={() => changeColorTheme(scheme.value)}
-                                    title={scheme.name}
+                                    className={`mode-btn ${theme === "light" ? "active" : ""}`}
+                                    onClick={() => setTheme("light")}
                                 >
-                                    {colorTheme === scheme.value && "✓"}
+                                    ☀️ Светлая
                                 </button>
-                            ))}
+                                <button
+                                    className={`mode-btn ${theme === "dark" ? "active" : ""}`}
+                                    onClick={() => setTheme("dark")}
+                                >
+                                    🌙 Тёмная
+                                </button>
+                            </div>
                         </div>
-                    </div>
 
-                    {/* Подсказка для мобильных устройств */}
-                    {isMobile && (
-                        <div className="mobile-hint">
-                            💡 Долгое нажатие для открытия меню
+                        {/* Выбор цветовой схемы */}
+                        <div className="dropdown-section">
+                            <div className="section-title">Акцентный цвет</div>
+                            <div className="color-grid">
+                                {colorSchemes.map(scheme => (
+                                    <button
+                                        key={scheme.value}
+                                        className={`color-option ${colorTheme === scheme.value ? 'active' : ''}`}
+                                        style={{ backgroundColor: scheme.color }}
+                                        onClick={() => changeColorTheme(scheme.value)}
+                                        title={scheme.name}
+                                    >
+                                        {colorTheme === scheme.value && "✓"}
+                                    </button>
+                                ))}
+                            </div>
                         </div>
-                    )}
-                </div>
+
+                        {/* Подсказка для мобильных устройств */}
+                        {isMobile && (
+                            <div className="mobile-hint">
+                                💡 Долгое нажатие для открытия меню
+                            </div>
+                        )}
+                    </div>
+                </>
             )}
         </div>
     );
