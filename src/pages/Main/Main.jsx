@@ -1,71 +1,58 @@
 import Layout from "../../components/Layout";
 import { Link } from "react-router";
-import {useState} from "react";
+import { useState } from "react";
 import "./Main.css";
-import MemberModal from "../Team/MemberModal";
 
 export const teamMembers = [
     {
         id: 1,
         name: "Андрей",
-        link: "/barkos",
-        role: "Junior Developer",
-        emoji: "🌱",
+        link: "/team/barkos",
+        role: "Backend Developer",
+        emoji: "🖥️",
         shortBio: "Постоянно учусь и развиваюсь в IT",
-        fullBio: "Начинающий разработчик с годичным опытом изучения Java и активной работой с Go, C++. Интересуюсь архитектурой приложений и созданием удобных интерфейсов. Увлекается разработкой собственных проектов для автоматизации задач.",
-        funFact: "Хочет написать интерпретатор для C++",
-        color: "#0074b3",
-        achievements: ["Изучаю Java, C++, Go", "Разрабатываю приложения"]
+        color: "#095883"
     },
     {
         id: 2,
         name: "Владимир",
-        role: "Lorem ipsum",
-        emoji: "🎨",
-        shortBio: "Lorem ipsum dolor sit amet",
-        fullBio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in condimentum nisi. Fusce fringilla orci sit amet quam blandit, at.",
-        funFact: "Lorem ipsum",
-        color: "#ff9500",
-        achievements: ["20+ дизайн-проектов", "2 премии", "7 лет творчества"]
+        link: "/team/vova",
+        role: "Когда матрица не фильм, а алгем...",
+        emoji: "✉️",
+        shortBio: "Для вас слово \"незачёт\" и слово \"смерть\" означают одно и то же.",
+        color: "#bb7109"
     },
     {
         id: 3,
         name: "Олег",
-        role: "Lorem ipsum",
+        link: "/team/oleg",
+        role: "Backend Developer",
         emoji: "⚙️",
-        shortBio: "Lorem ipsum dolor sit amet",
-        fullBio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in condimentum nisi. Fusce fringilla orci sit amet quam blandit, at.",
-        funFact: "Lorem ipsum",
-        color: "#34c759",
-        achievements: ["50+ API", "99.9% аптайм", "8 лет опыта"]
+        shortBio: "Строю надёжные серверные решения",
+        color: "#2d9346"
     },
     {
         id: 4,
         name: "Ярик",
-        role: "Lorem ipsum",
-        emoji: "🔍",
-        shortBio: "Lorem ipsum dolor sit amet",
-        fullBio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in condimentum nisi. Fusce fringilla orci sit amet quam blandit, at.",
-        funFact: "Lorem ipsum",
-        color: "#af52de",
-        achievements: ["1000+ багов найдено", "5 лет тестирования", "Автоматизация 80%"]
+        link: "/team/krakin",
+        role: "QA Engineer",
+        emoji: "💿",
+        shortBio: "Нахожу баги там, где их никто не ждёт",
+        color: "#8342a3"
     },
     {
         id: 5,
         name: "Андрей",
-        role: "Lorem ipsum",
-        emoji: "📱",
-        shortBio: "Lorem ipsum dolor sit amet",
-        fullBio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in condimentum nisi. Fusce fringilla orci sit amet quam blandit, at.",
-        funFact: "Lorem ipsum",
-        color: "#ff3b30",
-        achievements: ["15+ приложений", "1 млн скачиваний", "6 лет опыта"]
+        link: "/team/snails",
+        role: "Mobile Developer",
+        emoji: "📕",
+        shortBio: "Создаю приложения, которыми пользуются",
+        color: "#b5302a"
     }
 ];
 
 export default function Main() {
-    const [selectedMember, setSelectedMember] = useState(null);
-    const [viewMode, setViewMode] = useState('grid'); // grid / list
+    const [viewMode, setViewMode] = useState('grid');
 
     const getRandomRotation = () => {
         return Math.random() * 4 - 2;
@@ -79,7 +66,6 @@ export default function Main() {
                         Наша команда
                     </h1>
 
-                    {/* Переключатель вида */}
                     <div className="view-toggle">
                         <button
                             className={`view-btn ${viewMode === 'grid' ? 'active' : ''}`}
@@ -98,11 +84,9 @@ export default function Main() {
 
                 <div className={`team-container ${viewMode}`}>
                     {teamMembers.map(member => (
-                        <Link to={member.link}>
+                        <Link to={member.link} key={member.id} className="team-folder-link">
                             <div
-                                key={member.id}
                                 className="team-folder"
-                                onClick={() => setSelectedMember(member)}
                                 style={{
                                     '--folder-color': member.color,
                                     transform: `rotate(${getRandomRotation()}deg)`
@@ -120,20 +104,12 @@ export default function Main() {
                                     <p className="folder-bio">{member.shortBio}</p>
                                 </div>
                                 <div className="folder-hint">
-                                    <span>📂 Открыть папку</span>
+                                    <span>📂 Открыть страницу</span>
                                 </div>
                             </div>
                         </Link>
                     ))}
                 </div>
-
-                {/* Модальное окно */}
-                {selectedMember && (
-                    <MemberModal
-                        member={selectedMember}
-                        onClose={() => setSelectedMember(null)}
-                    />
-                )}
             </div>
         </Layout>
     );
