@@ -23,7 +23,6 @@ export default function Navbar() {
 
     const navItems = [
         { path: "/", label: "Главная", icon: "🏠" },
-        { path: "/fun", label: "Приколы", icon: "🎁" }
     ];
 
     const isActive = (path) => location.pathname === path;
