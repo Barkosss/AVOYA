@@ -133,6 +133,7 @@
     border-radius: 12px;
     border-left: 3px solid;
     font-style: italic;
+    color: var(--fun-fact-color)
 }
 
 /* Кнопка с приколом */

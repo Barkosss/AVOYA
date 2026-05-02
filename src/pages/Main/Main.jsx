@@ -1,4 +1,5 @@
 import Layout from "../../components/Layout";
+import { Link } from "react-router";
 import {useState} from "react";
 import "./Main.css";
 import MemberModal from "../Team/MemberModal";
@@ -7,10 +8,11 @@ export const teamMembers = [
     {
         id: 1,
         name: "Андрей",
+        link: "/barkos",
         role: "Junior Developer",
         emoji: "🌱",
         shortBio: "Постоянно учусь и развиваюсь в IT",
-        fullBio: "Начинающий разработчик с годичным опытом изучения Java и активной работой с Go, Python и React. Интересуюсь архитектурой приложений и созданием удобных интерфейсов. Увлекается разработкой собственных проектов для автоматизации задач.",
+        fullBio: "Начинающий разработчик с годичным опытом изучения Java и активной работой с Go, C++. Интересуюсь архитектурой приложений и созданием удобных интерфейсов. Увлекается разработкой собственных проектов для автоматизации задач.",
         funFact: "Хочет написать интерпретатор для C++",
         color: "#0074b3",
         achievements: ["Изучаю Java, C++, Go", "Разрабатываю приложения"]
@@ -63,10 +65,10 @@ export const teamMembers = [
 
 export default function Main() {
     const [selectedMember, setSelectedMember] = useState(null);
-    const [viewMode, setViewMode] = useState('grid'); // 'grid' или 'list'
+    const [viewMode, setViewMode] = useState('grid'); // grid / list
 
     const getRandomRotation = () => {
-        return Math.random() * 4 - 2; // от -2 до 2 градусов
+        return Math.random() * 4 - 2;
     };
 
     return (
@@ -96,30 +98,32 @@ export default function Main() {
 
                 <div className={`team-container ${viewMode}`}>
                     {teamMembers.map(member => (
-                        <div
-                            key={member.id}
-                            className="team-folder"
-                            onClick={() => setSelectedMember(member)}
-                            style={{
-                                '--folder-color': member.color,
-                                transform: `rotate(${getRandomRotation()}deg)`
-                            }}
-                        >
-                            <div className="folder-icon">
-                                <div className="folder-front" style={{backgroundColor: member.color}}>
-                                    <span className="folder-emoji">{member.emoji}</span>
+                        <Link to={member.link}>
+                            <div
+                                key={member.id}
+                                className="team-folder"
+                                onClick={() => setSelectedMember(member)}
+                                style={{
+                                    '--folder-color': member.color,
+                                    transform: `rotate(${getRandomRotation()}deg)`
+                                }}
+                            >
+                                <div className="folder-icon">
+                                    <div className="folder-front" style={{ backgroundColor: member.color }}>
+                                        <span className="folder-emoji">{member.emoji}</span>
+                                    </div>
+                                    <div className="folder-back" style={{ backgroundColor: member.color }}></div>
                                 </div>
-                                <div className="folder-back" style={{backgroundColor: member.color}}></div>
+                                <div className="folder-info">
+                                    <h3 className="folder-name">{member.name}</h3>
+                                    <p className="folder-role">{member.role}</p>
+                                    <p className="folder-bio">{member.shortBio}</p>
+                                </div>
+                                <div className="folder-hint">
+                                    <span>📂 Открыть папку</span>
+                                </div>
                             </div>
-                            <div className="folder-info">
-                                <h3 className="folder-name">{member.name}</h3>
-                                <p className="folder-role">{member.role}</p>
-                                <p className="folder-bio">{member.shortBio}</p>
-                            </div>
-                            <div className="folder-hint">
-                                <span>📂 Открыть папку</span>
-                            </div>
-                        </div>
+                        </Link>
                     ))}
                 </div>
 

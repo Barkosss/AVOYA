@@ -5,8 +5,24 @@ html.light {
     --navbar-text: #1c1c1e;
     --navbar-text-hover: rgba(0, 0, 0, 0.05);
     --border-light: rgba(0, 0, 0, 0.05);
+
+    --team-title-text: #131313;
+    --view-btn-color: #131313;
+    --view-btn-active-color: #FFFFFF;
+    
+    --folder-bio: #131313;
+    --folder-hint: #131313;
+
+    --fun-fact-color: #131313;
+
+    --notfound-hint-text: #131313;
+    --notfound-btn-color: #FFFFFF;
+
+    --footer-text: #131313;
+
     --bg-gradient: linear-gradient(135deg, #f5f5f7 0%, #e8e8ed 100%);
     --bg-mobile: #f5f5f7;
+    
     --scrollbar-track: #f1f1f1;
     --scrollbar-thumb: #888;
 }
@@ -17,6 +33,21 @@ html.dark {
     --navbar-text: #ffffff;
     --navbar-text-hover: rgba(255, 255, 255, 0.1);
     --border-light: rgba(255, 255, 255, 0.1);
+
+    --team-title-text: #FFFFFF;
+    --view-btn-color: #FFFFFF;
+    --view-btn-active-color: #FFFFFF;
+
+    --folder-bio-color: #FFFFFF;
+    --folder-hint-color: #FFFFFF;
+
+    --fun-fact-color: #FFFFFF;--notfound-hint-text: #131313;
+
+    --notfound-hint-text: #FFFFFF;
+    --notfound-btn-color: #FFFFFF;
+
+    --footer-text: #FFFFFF;
+
     --bg-gradient: linear-gradient(135deg, #1c1c1e 0%, #2c2c2e 100%);
     --bg-mobile: #000000;
     --scrollbar-track: #2c2c2e;
