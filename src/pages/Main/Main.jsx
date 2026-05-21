@@ -8,16 +8,16 @@ export const teamMembers = [
         id: 1,
         name: "Андрей",
         link: "/team/barkos",
-        role: "Backend Developer",
+        role: "Главный разработчик",
         emoji: "🖥️",
-        shortBio: "Постоянно учусь и развиваюсь в IT",
+        shortBio: "Для языка Си, чтобы прострелить себе ногу, надо придумать ружьё, пули, порох и ногу.",
         color: "#095883"
     },
     {
         id: 2,
         name: "Владимир",
         link: "/team/vova",
-        role: "Когда матрица не фильм, а алгем...",
+        role: "Лидер / Cоздатель отчёта",
         emoji: "✉️",
         shortBio: "Для вас слово \"незачёт\" и слово \"смерть\" означают одно и то же.",
         color: "#bb7109"
@@ -26,16 +26,16 @@ export const teamMembers = [
         id: 3,
         name: "Олег",
         link: "/team/oleg",
-        role: "Backend Developer",
+        role: "Помощник",
         emoji: "⚙️",
-        shortBio: "Строю надёжные серверные решения",
+        shortBio: "Помогу тебе и сделаю сам",
         color: "#2d9346"
     },
     {
         id: 4,
         name: "Ярик",
         link: "/team/krakin",
-        role: "QA Engineer",
+        role: "Спикер",
         emoji: "💿",
         shortBio: "Нахожу баги там, где их никто не ждёт",
         color: "#8342a3"
@@ -44,9 +44,9 @@ export const teamMembers = [
         id: 5,
         name: "Андрей",
         link: "/team/snails",
-        role: "Mobile Developer",
+        role: "Создатель презентации",
         emoji: "📕",
-        shortBio: "Создаю приложения, которыми пользуются",
+        shortBio: "Когда у вектора появилось больше трех координат?",
         color: "#b5302a"
     }
 ];
